@@ -1,0 +1,32 @@
+<div class="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-500 to-purple-500">
+    <div class="bg-white p-8 rounded shadow-md w-full max-w-md">
+      <h1 class="text-3xl font-semibold mb-6 text-center">Create an Account</h1>
+      <form [formGroup]="mySignUpForm" (ngSubmit)="onSubmit()">
+        <div class="mb-6">
+          <label for="name" class="block text-sm font-medium text-gray-700">Full Name</label>
+          <input formControlName="name" type="text" id="name" class="mt-1 block w-full px-4 py-2 rounded-md border border-gray-300 placeholder-gray-400 focus:ring-2 focus:ring-blue-400 focus:border-blue-400">
+        </div>
+        <div class="mb-6">
+            <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+            <input formControlName="email" type="email" id="email" class="mt-1 block w-full px-4 py-2 rounded-md border border-gray-300 placeholder-gray-400 focus:ring-2 focus:ring-blue-400 focus:border-blue-400">
+          </div>
+          <div class="mb-6">
+            <label for="email" class="block text-sm font-medium text-gray-700">Mobile</label>
+            <input formControlName="mobile" type="number" id="mobile" class="mt-1 block w-full px-4 py-2 rounded-md border border-gray-300 placeholder-gray-400 focus:ring-2 focus:ring-blue-400 focus:border-blue-400">
+          </div>
+        <div class="mb-6">
+          <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+          <input formControlName="password" type="password" id="password" class="mt-1 block w-full px-4 py-2 rounded-md border border-gray-300 placeholder-gray-400 focus:ring-2 focus:ring-blue-400 focus:border-blue-400">
+        </div>
+        <div class="mb-6">
+          <label for="confirmPassword" class="block text-sm font-medium text-gray-700">Confirm Password</label>
+          <input formControlName="confirmPassword" type="password" id="confirmPassword" class="mt-1 block w-full px-4 py-2 rounded-md border border-gray-300 placeholder-gray-400 focus:ring-2 focus:ring-blue-400 focus:border-blue-400">
+        </div>
+        <button type="submit" class="w-96" [disabled]="!mySignUpForm.valid" mat-raised-button color="primary">Register</button>
+      </form>
+      <div class="mt-4 text-sm text-center text-gray-600">
+        Already have an account? <a href="#" class="text-blue-500 hover:underline">Login</a>
+      </div>
+    </div>
+  </div>
+  

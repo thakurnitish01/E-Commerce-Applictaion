@@ -1,0 +1,66 @@
+<div class="min-h-screen bg-gray-100">
+    <app-navbar></app-navbar>
+    
+    <div class="py-6 px-4 sm:px-8 lg:px-16 xl:px-20 2xl:px-32">
+      <div class="max-w-4xl mx-auto">
+        <div class="py-10 bg-white shadow rounded-3xl sm:p-10">
+          <div class="flex items-center space-x-5">
+            <mat-icon class="h-14 w-14 text-green-500">shopping_cart</mat-icon>
+            <div class="font-semibold text-xl text-gray-800">My Orders</div>
+          </div>
+          <div class="divide-y divide-gray-200">
+            <ng-container *ngFor="let order of myOrders">
+              <div class="py-6">
+                <div class="flex items-center space-x-4">
+                  <div class="flex-shrink-0">
+                    <img class="h-12 w-12 rounded-full" [src]="order.images" alt="Product Image">
+                  </div>
+                  <div>
+                    <p class="text-gray-500">Order Date: {{ order.creationAt | date : "short" }}</p>
+                    <p class="text-gray-500">Total: {{ order.price | currency : "INR" }}</p>
+                  </div>
+                  <div class="ml-auto">
+                    <p class="text-gray-500">Delivery Status: {{ order.deliveryStatus }}</p>
+                  </div>
+                </div>
+                
+                <ng-container *ngIf="order.deliveryStatus === 'Shipped'; else elseblock">
+                  <!-- Tracking system content here -->
+                  <div class="mt-2">
+                    <p class="font-semibold">Tracking Information:</p>
+                    <ul class="list-disc list-inside">
+                      <li>Product:  <span class="text-teal-900 font-bold">{{ order.title | titlecase  }}</span></li>
+                      <li>Tracking number: {{ trackingId | titlecase  }}</li>
+                      <li>Estimated delivery date: {{ order.estimatedDeliveryDate | date : "short" }}</li>
+                    </ul>
+    
+                    <!-- Mat Progress bar with headings -->
+                    <div class=" items-center mt-10">
+                      <div class="flex items-center justify-between ml-4">
+                        <div>Order Placed</div>
+                        <div>Processing</div>
+                        <div>Shipped</div>
+                        <div>Delivered</div>
+                      </div>
+                      <mat-progress-bar class="flex-grow" mode="determinate" [value]="order.trackingProgress"></mat-progress-bar>
+                    </div>
+    
+                    <p *ngIf="order.trackingProgress === 100">Delivered on: {{ order.deliveryDate | date : "short" }}</p>
+                  </div>
+                </ng-container>
+    
+                <ng-template #elseblock>
+                    <h5 class="justify-start"> Delivered on <span class="text-teal-800 font-bold">{{order.estimatedDeliveryDate | date }}</span></h5>
+                
+                    <div class="mt-5 flex justify-end">
+                        <button (click)="productDetails(order.id)" class="mr-auto" mat-raised-button color="primary"><mat-icon>view_carousel</mat-icon> View Order</button>
+                      </div>
+                </ng-template>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
